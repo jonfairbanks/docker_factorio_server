@@ -35,7 +35,7 @@ docker run -d -p 34197:34197/udp -p 27015:27015/tcp \
   -v /tmp/factorio:/factorio \
   --name factorio \
   --restart=always  \
-  dtandersen/factorio
+  jonfairbanks/factorio
 ```
 
 For those new to Docker, here is an explanation of the options:
