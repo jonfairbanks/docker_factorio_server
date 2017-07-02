@@ -6,3 +6,6 @@ services:
      - "34197:34197"
     volumes:
      - /tmp/factorio:/factorio
+    command:
+     - --start-server-load-scenario
+     - FactorioScenarioMultiplayerSpawn
