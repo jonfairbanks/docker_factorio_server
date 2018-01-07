@@ -1,9 +1,9 @@
-# Factorio [![](https://images.microbadger.com/badges/image/dtandersen/factorio.svg)](https://microbadger.com/images/dtandersen/factorio "Get your own image badge on microbadger.com") [![Docker Pulls](https://img.shields.io/docker/pulls/dtandersen/factorio.svg)](https://hub.docker.com/r/dtandersen/factorio/) [![Docker Stars](https://img.shields.io/docker/stars/dtandersen/factorio.svg)](https://hub.docker.com/r/dtandersen/factorio/)
+# Factorio [![](https://images.microbadger.com/badges/image/jonfairbanks/factorio.svg)](https://microbadger.com/images/jonfairbanks/factorio "Get your own image badge on microbadger.com") [![Docker Pulls](https://img.shields.io/docker/pulls/jonfairbanks/factorio.svg)](https://hub.docker.com/r/jonfairbanks/factorio/) [![Docker Stars](https://img.shields.io/docker/stars/jonfairbanks/factorio.svg)](https://hub.docker.com/r/jonfairbanks/factorio/)
 
-* `0.16.11`, `0.16`, `latest` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
-* `0.15.40`, `0.15`, `stable` [(0.15/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.15/Dockerfile)
-* `0.14.23`, `0.14` [(0.14/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.14/Dockerfile)
-* `0.13.20`, `0.13`  [(0.13/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.13/Dockerfile)
+* `0.16.11`, `0.16`, `latest` [(0.16/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.16/Dockerfile)
+* `0.15.40`, `0.15`, `stable` [(0.15/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.15/Dockerfile)
+* `0.14.23`, `0.14` [(0.14/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.14/Dockerfile)
+* `0.13.20`, `0.13`  [(0.13/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.13/Dockerfile)
 
 *Tag descriptions*
 
@@ -74,7 +74,7 @@ To issue console commands to the server, start the server in interactive mode wi
 
 	docker run -d -it  \
         --name factorio \
-        dtandersen/factorio
+        jonfairbanks/factorio
 	docker attach factorio
 
 
@@ -88,7 +88,7 @@ Delete the container and refresh the image:
 
 	docker stop factorio
 	docker rm factorio
-	docker pull dtandersen/factorio
+	docker pull jonfairbanks/factorio
 
 Now run the server as before. In about a minute the new version of Factorio should be up and running, complete with saves and config!
 
@@ -178,7 +178,7 @@ Use the `PORT` environment variable to start the server on the a different port,
 
 # Contributors
 
-* [dtandersen](https://github.com/dtandersen/docker_factorio_server) - Maintainer
+* [jonfairbanks](https://github.com/jonfairbanks/docker_factorio_server) - Maintainer
 * [Zopanix](https://github.com/zopanix/docker_factorio_server) - Originator
 * [Rfvgyhn](https://github.com/Rfvgyhn/docker-factorio) - Randomly generate RCON password
 * [gnomus](https://github.com/gnomus/docker_factorio_server) - White listing
