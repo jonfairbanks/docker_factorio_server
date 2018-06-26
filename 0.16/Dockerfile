@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-glibc:alpine-3.6
+FROM frolvlad/alpine-glibc:alpine-3.7
 
 MAINTAINER https://github.com/dtandersen/docker_factorio_server
 
@@ -9,12 +9,15 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.16.11 \
-    SHA1=31d227881249eef95fb99f653fa2dada6faada48
+    VERSION=0.16.51 \
+    SHA1=127e7ff484ab263b13615d6114013ce0a66ac929 \
+    SAVES=/factorio/saves \
+    CONFIG=/factorio/config \
+    MODS=/factorio/mods \
+    SCENARIOS=/factorio/scenarios \
+    SCRIPTOUTPUT=/factorio/script-output
 
-VOLUME /factorio
-
-RUN mkdir -p /opt && \
+RUN mkdir -p /opt /factorio && \
     apk add --update --no-cache pwgen && \
     apk add --update --no-cache --virtual .build-deps curl && \
     curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
@@ -23,16 +26,20 @@ RUN mkdir -p /opt && \
     tar xf /tmp/factorio_headless_x64_$VERSION.tar.xz --directory /opt && \
     chmod ugo=rwx /opt/factorio && \
     rm /tmp/factorio_headless_x64_$VERSION.tar.xz && \
-    ln -s /factorio/saves /opt/factorio/saves && \
-    ln -s /factorio/mods /opt/factorio/mods && \
+    ln -s $SAVES /opt/factorio/saves && \
+    ln -s $MODS /opt/factorio/mods && \
+    ln -s $SCENARIOS /opt/factorio/scenarios && \
+    ln -s $SCRIPTOUTPUT /opt/factorio/script-output && \
     apk del .build-deps && \
     addgroup -g $PGID -S $GROUP && \
-    adduser -u $PUID -G $USER -s /bin/sh -SDH $GROUP && \
+    adduser -u $PUID -G $GROUP -s /bin/sh -SDH $USER && \
     chown -R $USER:$GROUP /opt/factorio /factorio
+
+VOLUME /factorio
 
 EXPOSE $PORT/udp $RCON_PORT/tcp
 
-COPY ./docker-entrypoint.sh /
+COPY files/ /
 
 USER $USER
 
