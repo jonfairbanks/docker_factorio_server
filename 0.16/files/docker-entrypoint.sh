@@ -1,17 +1,13 @@
 #!/bin/sh -x
-
 set -e
 
 id
 
-SAVES=/factorio/saves
-CONFIG=/factorio/config
-
 mkdir -p $SAVES
-mkdir -p /factorio/mods
 mkdir -p $CONFIG
-
-#chown -R factorio /factorio
+mkdir -p $MODS
+mkdir -p $SCENARIOS
+mkdir -p $SCRIPTOUTPUT
 
 if [ ! -f $CONFIG/rconpw ]; then
   echo $(pwgen 15 1) > $CONFIG/rconpw
@@ -29,6 +25,10 @@ if [ ! -f $CONFIG/map-settings.json ]; then
   cp /opt/factorio/data/map-settings.example.json $CONFIG/map-settings.json
 fi
 
+if find -L $SAVES -iname \*.tmp.zip -mindepth 1 -print | grep -q .; then
+  rm -f $SAVES/*.tmp.zip
+fi
+
 if ! find -L $SAVES -iname \*.zip -mindepth 1 -print | grep -q .; then
   /opt/factorio/bin/x64/factorio \
     --create $SAVES/_autosave1.zip  \
@@ -44,4 +44,5 @@ exec /opt/factorio/bin/x64/factorio \
   --server-banlist $CONFIG/server-banlist.json \
   --rcon-port $RCON_PORT \
   --rcon-password "$(cat $CONFIG/rconpw)" \
-  --server-id /factorio/config/server-id.json
+  --server-id /factorio/config/server-id.json \
+  $@
