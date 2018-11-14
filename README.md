@@ -1,4 +1,5 @@
-# Factorio [![](https://images.microbadger.com/badges/image/dtandersen/factorio.svg)](https://microbadger.com/images/dtandersen/factorio "Get your own image badge on microbadger.com") [![Docker Pulls](https://img.shields.io/docker/pulls/dtandersen/factorio.svg)](https://hub.docker.com/r/dtandersen/factorio/) [![Docker Stars](https://img.shields.io/docker/stars/dtandersen/factorio.svg)](https://hub.docker.com/r/dtandersen/factorio/)
+# Docker Based Factorio Server
+Factorio server based on dtandersen's Docker image with additional scenario support
 
 * `0.16.51`, `0.16`, `stable`, `latest` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
 * `0.15.40`, `0.15` [(0.15/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.15/Dockerfile)
@@ -40,7 +41,7 @@ sudo docker run -d \
   -v /opt/factorio:/factorio \
   --name factorio \
   --restart=always \
-  dtandersen/factorio
+  jonfairbanks/docker_factorio_server
 ```
 
 For those new to Docker, here is an explanation of the options:
@@ -80,7 +81,7 @@ To issue console commands to the server, start the server in interactive mode wi
 
 	docker run -d -it  \
         --name factorio \
-        dtandersen/factorio
+        jonfairbanks/docker_factorio_server
 	docker attach factorio
 
 
@@ -94,7 +95,7 @@ Delete the container and refresh the image:
 
 	docker stop factorio
 	docker rm factorio
-	docker pull dtandersen/factorio
+	docker pull jonfairbanks/docker_factorio_server
 
 Now run the server as before. In about a minute the new version of Factorio should be up and running, complete with saves and config!
 
@@ -125,7 +126,7 @@ docker run -d \
   --name factorio \
   --restart=always  \
   --entrypoint "/scenario.sh" \
-  dtandersen/factorio \
+  jonfairbanks/docker_factorio_server \
   MyScenarioName
 ```
 
@@ -141,7 +142,7 @@ docker run -d \
   --name factorio \
   --restart=always  \
   --entrypoint "/scenario2map.sh" \
-  dtandersen/factorio
+  jonfairbanks/docker_factorio_server
   MyScenarioName
 ```
 
@@ -192,10 +193,10 @@ To keep things simple, the container uses a single volume mounted at `/factorio`
 
 [Docker Compose](https://docs.docker.com/compose/install/) is an easy way to run Docker containers.
 
-First get a [docker-compose.yml](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/docker-compose.yml) file. To get it from this repository:
+First get a [docker-compose.yml](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.16/docker-compose.yml) file. To get it from this repository:
 
 ```
-git clone https://github.com/dtandersen/docker_factorio_server.git
+git clone https://github.com/jonfairbanks/docker_factorio_server.git
 cd docker_factorio_server/0.16
 ```
 
@@ -205,7 +206,7 @@ Or make your own:
 version: '2'
 services:
   factorio:
-    image: dtandersen/factorio
+    image: jonfairbanks/docker_factorio_server
     ports:
      - "34197:34197/udp"
      - "27015:27015/tcp"
@@ -256,7 +257,7 @@ sudo docker run -d \
   -v /opt/factorio:/factorio \
   --name factorio \
   --restart=always  \
-  dtandersen/factorio
+  jonfairbanks/docker_factorio_server
 ```
 
 VirtualBox users must enable Bridged networking in order for the host to be assigned an internal network IP. Enable Bridged networking in Vagrant with:
@@ -268,7 +269,7 @@ VirtualBox users must enable Bridged networking in order for the host to be assi
 
 ## Vagrant
 
-Vagrant is a good way for those without a Linux machine to try Docker. Check out the [Factorio Vagrant Box](https://github.com/dtandersen/factorio-lan-vagrant).
+Vagrant is a good way for those without a Linux machine to try Docker. Check out [Factorio Vagrant Box](https://github.com/dtandersen/factorio-lan-vagrant).
 
 ## Troubleshooting
 
@@ -287,8 +288,9 @@ Use the `PORT` environment variable to start the server on the a different port,
 
 # Contributors
 
-* [dtandersen](https://github.com/dtandersen/docker_factorio_server) - Maintainer
+* [jonfairbanks](https://github.com/jonfairbanks/docker_factorio_server) - Maintainer
 * [Fank](https://github.com/Fankserver/docker-factorio-watchdog) - Keeper of the Factorio watchdog that keeps the version up-to-date.
+* [dtandersen](https://github.com/dtandersen/docker_factorio_server) - Originator
 * [Zopanix](https://github.com/zopanix/docker_factorio_server) - Originator
 * [Rfvgyhn](https://github.com/Rfvgyhn/docker-factorio) - Randomly generate RCON password
 * [gnomus](https://github.com/gnomus/docker_factorio_server) - White listing
