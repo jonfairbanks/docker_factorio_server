@@ -2,9 +2,6 @@
 Factorio server based on dtandersen's Docker image with additional scenario support
 
 * `0.16.51`, `0.16`, `stable`, `latest` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
-* `0.15.40`, `0.15` [(0.15/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.15/Dockerfile)
-* `0.14.23`, `0.14` [(0.14/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.14/Dockerfile)
-* `0.13.20`, `0.13`  [(0.13/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.13/Dockerfile)
 
 *Tag descriptions*
 
@@ -132,7 +129,7 @@ docker run -d \
 
 ## Converting Scenarios to Regular Maps
 
-If you would like to export your scenario to a saved map, you can use the example entrypoint similar to the Scenario usag above. Factorio will run once, converting the Scenario to a saved Map in your saves directory. A restart of the docker image using the standard options will then load that map, just as if the scenario were just started by the Scenarios example noted above.
+If you would like to export your scenario to a saved map, you can use the example entrypoint similar to the Scenario usage above. Factorio will run once, converting the Scenario to a saved Map in your saves directory. A restart of the Docker image using the standard options will then load that map, just as if the scenario were just started by the Scenarios example noted above.
 
 ```
 docker run -d \
@@ -140,7 +137,6 @@ docker run -d \
   -p 27015:27015/tcp \
   -v /opt/factorio:/factorio \
   --name factorio \
-  --restart=always  \
   --entrypoint "/scenario2map.sh" \
   jonfairbanks/docker_factorio_server
   MyScenarioName
