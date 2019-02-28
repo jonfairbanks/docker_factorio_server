@@ -1,13 +1,17 @@
 # Docker Factorio Server
 Factorio server based on dtandersen's Docker image with additional scenario support
 
-* `0.16.51`, `0.16`, `stable`, `latest` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
+* `0.17.2-1`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.17/Dockerfile)
+* `0.16.51`, `0.16`, `stable` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
+* `0.15.40`, `0.15` [(0.15/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.15/Dockerfile)
+* `0.14.23`, `0.14` [(0.14/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.14/Dockerfile)
+* `0.13.20`, `0.13`  [(0.13/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.13/Dockerfile)
 
 *Tag descriptions*
 
-* `latest` - highest version: may be experimental.
-* `stable` - highest version declared stable.
-* `0.x` - highest version in a branch: may be experimental.
+* `latest` - most up-to-date version (may be experimental).
+* `stable` - version declared stable on [factorio.com](https://www.factorio.com).
+* `0.x` - latest version in a branch.
 * `0.x.y` - a specific version.
 * `0.x-dev` - whatever is in master for that version.
 
@@ -160,6 +164,24 @@ Create file `config/server-whitelist.json` and add the whitelisted users.
 		"friend"
 	]
 
+## Banlisting (0.17.1+)
+
+Create file `config/server-banlist.json` and add the banlisted users.
+
+    [
+        "bad_person",
+        "other_bad_person"
+    ]
+
+## Adminlisting (0.17.1+)
+
+Create file `config/server-adminlist.json` and add the adminlisted users.
+
+    [
+        "you",
+        "friend"
+    ]
+
 # Container Details
 
 The philosophy is to [keep it simple](http://wiki.c2.com/?KeepItSimple).
@@ -178,7 +200,9 @@ To keep things simple, the container uses a single volume mounted at `/factorio`
     |   |-- map-gen-settings.json
     |   |-- rconpw
     |   |-- server-settings.json
-    |   `-- server-whitelist.json
+    |   |-- server-whitelist.json
+    |   |-- server-banlist.json
+    |   `-- server-adminlist.json
     |-- mods
     |   `-- fancymod.zip
     `-- saves
