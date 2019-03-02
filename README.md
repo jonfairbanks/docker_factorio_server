@@ -1,7 +1,7 @@
 # Docker Factorio Server
 Factorio server based on dtandersen's Docker image with additional scenario support
 
-* `0.17.2-1`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.17/Dockerfile)
+* `0.17.4`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.17/Dockerfile)
 * `0.16.51`, `0.16`, `stable` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
 
 *Tag descriptions*
