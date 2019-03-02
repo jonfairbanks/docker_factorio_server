@@ -1,17 +1,13 @@
 # Docker Factorio Server
 Factorio server based on dtandersen's Docker image with additional scenario support
 
-* `0.17.4`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.17/Dockerfile)
-* `0.16.51`, `0.16`, `stable` [(0.16/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.16/Dockerfile)
+* `0.17.4`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.17/Dockerfile)
+* `0.16.51`, `0.16`, `stable` [(0.16/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.16/Dockerfile)
 
 *Tag descriptions*
 
 * `latest` - most up-to-date version (may be experimental).
 * `stable` - version declared stable on [factorio.com](https://www.factorio.com).
-* `0.x` - latest version in a branch.
-* `0.x.y` - a specific version.
-* `0.x-dev` - whatever is in master for that version.
-
 
 # What is Factorio?
 
