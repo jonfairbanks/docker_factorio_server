@@ -9,8 +9,8 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.17.4 \
-    SHA1=30a7387e0450ecda8a48a9b56b18058c3f8a9f69 \
+    VERSION=0.17.5 \
+    SHA1=5a1325f2b41322ccf6bd374f32065057442fef2f \
     SAVES=/factorio/saves \
     CONFIG=/factorio/config \
     MODS=/factorio/mods \
@@ -18,7 +18,7 @@ ENV PORT=34197 \
     SCRIPTOUTPUT=/factorio/script-output
 
 RUN mkdir -p /opt /factorio && \
-    apk add --update --no-cache pwgen su-exec && \
+    apk add --update --no-cache pwgen su-exec binutils && \
     apk add --update --no-cache --virtual .build-deps curl && \
     curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
         -o /tmp/factorio_headless_x64_$VERSION.tar.xz && \
@@ -34,10 +34,6 @@ RUN mkdir -p /opt /factorio && \
     addgroup -g $PGID -S $GROUP && \
     adduser -u $PUID -G $GROUP -s /bin/sh -SDH $USER && \
     chown -R $USER:$GROUP /opt/factorio /factorio
-#    mkdir -p /opt/factorio/temp && \
-#    chmod 777 -R /opt/factorio/temp && \
-#    mkdir -p /opt/factorio/temp && \
-#    chmod 777 -R /opt/factorio/temp && \
 
 VOLUME /factorio
 

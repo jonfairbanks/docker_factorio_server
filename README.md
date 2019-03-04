@@ -1,7 +1,7 @@
 # Docker Factorio Server
 Factorio server based on dtandersen's Docker image with additional scenario support
 
-* `0.17.4`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.17/Dockerfile)
+* `0.17.5`, `0.17`, `latest` [(0.17/Dockerfile)](https://github.com/dtandersen/docker_factorio_server/blob/master/0.17/Dockerfile)
 * `0.16.51`, `0.16`, `stable` [(0.16/Dockerfile)](https://github.com/jonfairbanks/docker_factorio_server/blob/master/0.16/Dockerfile)
 
 *Tag descriptions*
@@ -188,19 +188,21 @@ The philosophy is to [keep it simple](http://wiki.c2.com/?KeepItSimple).
 
 To keep things simple, the container uses a single volume mounted at `/factorio`. This volume stores configuration, mods, and saves.
 
+The files in this volume should be owned by the factorio user, uid 845.
+
     factorio
     |-- config
     |   |-- map-gen-settings.json
+    |   |-- map-settings.json
     |   |-- rconpw
-    |   |-- server-settings.json
-    |   |-- server-whitelist.json
+    |   |-- server-adminlist.json
     |   |-- server-banlist.json
-    |   `-- server-adminlist.json
+    |   |-- server-settings.json
+    |   `-- server-whitelist.json
     |-- mods
     |   `-- fancymod.zip
     `-- saves
         `-- _autosave1.zip
-
 
 ## Docker Compose
 
@@ -273,16 +275,16 @@ sudo docker run -d \
   jonfairbanks/docker_factorio_server
 ```
 
-VirtualBox users must enable Bridged networking in order for the host to be assigned an internal network IP. Enable Bridged networking in Vagrant with:
+## Vagrant
+
+[Vagrant](https://www.vagrantup.com/) is a easy way to setup a virtual machine (VM) to run Docker. The [Factorio Vagrant box repository](https://github.com/dtandersen/factorio-lan-vagrant) contains a sample Vagrantfile.
+
+For LAN games the VM needs an internal IP in order for clients to connect. One way to do this is with a public network. The VM uses DHCP to acquire an IP address. The VM must also forward port 34197.
 
 ```
   config.vm.network "public_network"
   config.vm.network "forwarded_port", guest: 34197, host: 34197
 ```
-
-## Vagrant
-
-Vagrant is a good way for those without a Linux machine to try Docker. Check out [Factorio Vagrant Box](https://github.com/dtandersen/factorio-lan-vagrant).
 
 ## Troubleshooting
 
@@ -303,6 +305,7 @@ Use the `PORT` environment variable to start the server on the a different port,
 
 * [jonfairbanks](https://github.com/jonfairbanks/docker_factorio_server) - Maintainer
 * [Fank](https://github.com/Fankserver/docker-factorio-watchdog) - Keeper of the Factorio watchdog that keeps the version up-to-date.
+* [DBendit](https://github.com/DBendit/docker_factorio_server) - Admin list, ban list, version updates
 * [dtandersen](https://github.com/dtandersen/docker_factorio_server) - Originator
 * [Zopanix](https://github.com/zopanix/docker_factorio_server) - Originator
 * [Rfvgyhn](https://github.com/Rfvgyhn/docker-factorio) - Randomly generate RCON password
