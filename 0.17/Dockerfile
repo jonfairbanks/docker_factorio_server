@@ -9,16 +9,18 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.17.31 \
-    SHA1=cec9c75f09b03979f17d3b26d747165008cc0c64 \
+    VERSION=0.17.32 \
+    SHA1=1dd0341e5a2f9c952e713078ee70649a782309fe \
     SAVES=/factorio/saves \
     CONFIG=/factorio/config \
     MODS=/factorio/mods \
     SCENARIOS=/factorio/scenarios \
-    SCRIPTOUTPUT=/factorio/script-output
+    SCRIPTOUTPUT=/factorio/script-output \
+    PUID=$PUID \
+    PGID=$PGID
 
 RUN mkdir -p /opt /factorio && \
-    apk add --update --no-cache pwgen su-exec binutils gettext libintl && \
+    apk add --update --no-cache pwgen su-exec binutils gettext libintl shadow && \
     apk add --update --no-cache --virtual .build-deps curl && \
     curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
         -o /tmp/factorio_headless_x64_$VERSION.tar.xz && \
