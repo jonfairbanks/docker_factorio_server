@@ -1,6 +1,6 @@
-FROM frolvlad/alpine-glibc:alpine-3.7
+FROM frolvlad/alpine-glibc:alpine-3.9
 
-MAINTAINER https://github.com/jonfairbanks/docker_factorio_server
+LABEL maintainer="https://github.com/jonfairbanks/docker-factorio-server"
 
 ARG USER=factorio
 ARG GROUP=factorio
@@ -15,10 +15,12 @@ ENV PORT=34197 \
     CONFIG=/factorio/config \
     MODS=/factorio/mods \
     SCENARIOS=/factorio/scenarios \
-    SCRIPTOUTPUT=/factorio/script-output
+    SCRIPTOUTPUT=/factorio/script-output \
+    PUID="$PUID" \
+    PGID="$PGID"
 
 RUN mkdir -p /opt /factorio && \
-    apk add --update --no-cache pwgen && \
+    apk add --update --no-cache pwgen su-exec shadow && \
     apk add --update --no-cache --virtual .build-deps curl && \
     curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
         -o /tmp/factorio_headless_x64_$VERSION.tar.xz && \
@@ -40,7 +42,5 @@ VOLUME /factorio
 EXPOSE $PORT/udp $RCON_PORT/tcp
 
 COPY files/ /
-
-USER $USER
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

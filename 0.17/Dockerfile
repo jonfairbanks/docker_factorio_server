@@ -1,6 +1,6 @@
 FROM frolvlad/alpine-glibc:alpine-3.9
 
-MAINTAINER https://github.com/jonfairbanks/docker_factorio_server
+LABEL maintainer="https://github.com/jonfairbanks/docker-factorio-server"
 
 ARG USER=factorio
 ARG GROUP=factorio
@@ -9,33 +9,33 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.17.32 \
-    SHA1=1dd0341e5a2f9c952e713078ee70649a782309fe \
+    VERSION=0.17.50 \
+    SHA1=91a8300b38220dc688185294eac5df4a50b2b693 \
     SAVES=/factorio/saves \
     CONFIG=/factorio/config \
     MODS=/factorio/mods \
     SCENARIOS=/factorio/scenarios \
     SCRIPTOUTPUT=/factorio/script-output \
-    PUID=$PUID \
-    PGID=$PGID
+    PUID="$PUID" \
+    PGID="$PGID"
 
 RUN mkdir -p /opt /factorio && \
     apk add --update --no-cache pwgen su-exec binutils gettext libintl shadow && \
     apk add --update --no-cache --virtual .build-deps curl && \
-    curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
+    curl -sSL "https://www.factorio.com/get-download/$VERSION/headless/linux64" \
         -o /tmp/factorio_headless_x64_$VERSION.tar.xz && \
     echo "$SHA1  /tmp/factorio_headless_x64_$VERSION.tar.xz" | sha1sum -c && \
-    tar xf /tmp/factorio_headless_x64_$VERSION.tar.xz --directory /opt && \
+    tar xf "/tmp/factorio_headless_x64_$VERSION.tar.xz" --directory /opt && \
     chmod ugo=rwx /opt/factorio && \
-    rm /tmp/factorio_headless_x64_$VERSION.tar.xz && \
-    ln -s $SAVES /opt/factorio/saves && \
-    ln -s $MODS /opt/factorio/mods && \
-    ln -s $SCENARIOS /opt/factorio/scenarios && \
-    ln -s $SCRIPTOUTPUT /opt/factorio/script-output && \
+    rm "/tmp/factorio_headless_x64_$VERSION.tar.xz" && \
+    ln -s "$SAVES" /opt/factorio/saves && \
+    ln -s "$MODS" /opt/factorio/mods && \
+    ln -s "$SCENARIOS" /opt/factorio/scenarios && \
+    ln -s "$SCRIPTOUTPUT" /opt/factorio/script-output && \
     apk del .build-deps && \
-    addgroup -g $PGID -S $GROUP && \
-    adduser -u $PUID -G $GROUP -s /bin/sh -SDH $USER && \
-    chown -R $USER:$GROUP /opt/factorio /factorio
+    addgroup -g "$PGID" -S "$GROUP" && \
+    adduser -u "$PUID" -G "$GROUP" -s /bin/sh -SDH "$USER" && \
+    chown -R "$USER":"$GROUP" /opt/factorio /factorio
 
 VOLUME /factorio
 
