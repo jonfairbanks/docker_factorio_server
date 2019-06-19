@@ -1,6 +1,6 @@
 FROM frolvlad/alpine-glibc:alpine-3.9
 
-LABEL maintainer="https://github.com/jonfairbanks/docker-factorio-server"
+MAINTAINER https://github.com/jonfairbanks/docker_factorio_server
 
 ARG USER=factorio
 ARG GROUP=factorio
@@ -9,25 +9,20 @@ ARG PGID=845
 
 ENV PORT=34197 \
     RCON_PORT=27015 \
-    VERSION=0.16.51 \
-    SHA1=127e7ff484ab263b13615d6114013ce0a66ac929 \
     SAVES=/factorio/saves \
     CONFIG=/factorio/config \
     MODS=/factorio/mods \
     SCENARIOS=/factorio/scenarios \
-    SCRIPTOUTPUT=/factorio/script-output \
-    PUID="$PUID" \
-    PGID="$PGID"
+    SCRIPTOUTPUT=/factorio/script-output
 
 RUN mkdir -p /opt /factorio && \
-    apk add --update --no-cache pwgen su-exec shadow && \
+    apk add --update --no-cache pwgen su-exec binutils gettext libintl && \
     apk add --update --no-cache --virtual .build-deps curl && \
-    curl -sSL https://www.factorio.com/get-download/$VERSION/headless/linux64 \
-        -o /tmp/factorio_headless_x64_$VERSION.tar.xz && \
-    echo "$SHA1  /tmp/factorio_headless_x64_$VERSION.tar.xz" | sha1sum -c && \
-    tar xf /tmp/factorio_headless_x64_$VERSION.tar.xz --directory /opt && \
+    curl -sSL https://www.factorio.com/get-download/latest/headless/linux64 \
+        -o /tmp/factorio_headless_x64_latest.tar.xz && \
+    tar xf /tmp/factorio_headless_x64_latest.tar.xz --directory /opt && \
     chmod ugo=rwx /opt/factorio && \
-    rm /tmp/factorio_headless_x64_$VERSION.tar.xz && \
+    rm /tmp/factorio_headless_x64_latest.tar.xz && \
     ln -s $SAVES /opt/factorio/saves && \
     ln -s $MODS /opt/factorio/mods && \
     ln -s $SCENARIOS /opt/factorio/scenarios && \
